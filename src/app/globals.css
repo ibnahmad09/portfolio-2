@@ -128,3 +128,13 @@ body {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
+
+/* Scrollbar hide */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

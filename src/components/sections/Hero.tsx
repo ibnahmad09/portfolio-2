@@ -8,10 +8,10 @@ export default function Hero({ scrollTo }: HeroProps) {
       <div className="mx-auto max-w-6xl text-center">
         <div className="mb-8">
           <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mb-6">
-            <span className="text-white font-bold text-4xl">JD</span>
+            <span className="text-white font-bold text-4xl">AAM</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-bold mb-4">
-              Hi, I&apos;m <span className="gradient-text">John Doe</span>
+              Hi, Saya <span className="gradient-text">Aditya Ahmad Mulyana</span>
             </h1>
           <p className="text-xl md:text-2xl text-muted mb-8 max-w-3xl mx-auto">
             Full Stack Developer & UI/UX Enthusiast

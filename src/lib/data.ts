@@ -82,6 +82,7 @@ export const socialLinks = [
 // Navigation items
 export const navItems = [
   { id: "home", label: "Beranda" },
+  { id: "about", label: "Tentang" },
   { id: "skills", label: "Keterampilan" },
   { id: "projects", label: "Proyek" },
   { id: "contact", label: "Kontak" },

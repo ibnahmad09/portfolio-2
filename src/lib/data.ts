@@ -79,10 +79,51 @@ export const socialLinks = [
   { name: "Email", icon: "✉️", url: "mailto:john@example.com" },
 ];
 
+// Experience data
+export const experiences = [
+  {
+    id: 1,
+    company: "Freelance Developer",
+    position: "Full Stack Laravel Developer",
+    period: "Juni 2024 - Agustus 2025",
+    startDate: "2024-06",
+    endDate: "2025-08",
+    description: "Bertanggung jawab dalam pengembangan aplikasi web full stack menggunakan teknologi Laravel.",
+    responsibilities: [
+      "Mengembangkan aplikasi web menggunakan framework Laravel",
+      "Merancang dan mengimplementasikan database MySQL",
+      "Mengintegrasikan API pihak ketiga seperti Midtrans untuk pembayaran",
+      "Melakukan code review dan debugging aplikasi",
+      "Ber kolaborasi dengan tim desain untuk implementasi UI/UX",
+      "Melakukan testing dan optimasi performa aplikasi"
+    ],
+    icon: "💼",
+    logo: "🏢"
+  },
+  {
+    id: 2,
+    company: "UPT Perpustakaan Universitas Riau",
+    position: "Staff IT",
+    period: "Agustus 2024 - Oktober 2024",
+    startDate: "2022-06",
+    endDate: "2024-10",
+    description: "Bertanggung jawab dalam pengembangan sistem perpustakaan universitas riau.",
+    responsibilities: [
+      "Mendesain ulang website perpustakaan universitas riau menggunakan Wordpress",
+      "Menginput data mahasiswa, dosen, dan staff ke dalam sistem perpustakaan",
+      "Menginput data peminjaman buku, pengembalian buku, dan peminjaman buku",
+      "Berkolaborasi dengan tim desain untuk membuat poster desain poster perpustakaan"
+    ],
+    icon: "📚",
+    logo: "🏢"
+  },
+];
+
 // Navigation items
 export const navItems = [
   { id: "home", label: "Beranda" },
   { id: "about", label: "Tentang" },
+  { id: "experience", label: "Pengalaman" },
   { id: "skills", label: "Keterampilan" },
   { id: "projects", label: "Proyek" },
   { id: "contact", label: "Kontak" },

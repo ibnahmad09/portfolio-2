@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Navigation, Hero, About, Skills, Projects, Contact, Footer } from "@/components";
+import { Navigation, Hero, About, Experience, Skills, Projects, Contact, Footer } from "@/components";
 
 export default function Home() {
   const [active, setActive] = useState<string>("home");
@@ -20,7 +20,7 @@ export default function Home() {
       { rootMargin: "-40% 0px -50% 0px", threshold: 0.01 }
     );
 
-    const ids = ["home", "about", "skills", "projects", "contact"];
+    const ids = ["home", "about", "experience", "skills", "projects", "contact"];
     ids.forEach((id) => {
       const el = document.getElementById(id);
       if (el) {
@@ -56,6 +56,7 @@ export default function Home() {
       <main>
         <Hero scrollTo={scrollTo} />
         <About />
+        <Experience />
         <Skills />
         <Projects />
         <Contact />

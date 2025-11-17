@@ -73,20 +73,7 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
-                <div className="flex gap-3">
-                  <a
-                    href={project.demo}
-                    className="text-primary hover:text-primary-light transition-colors font-medium"
-                  >
-                    Live Demo →
-                  </a>
-                  <a
-                    href={project.source}
-                    className="text-muted hover:text-primary transition-colors font-medium"
-                  >
-                    Source Code →
-                  </a>
-                </div>
+                <div className="text-sm text-muted">Source code tersedia berdasarkan permintaan.</div>
               </div>
             </div>
           ))}

@@ -51,8 +51,6 @@ export const projects = [
     technologies: ["Laravel", "MySQL", "Tailwinds CSS", "Figma", "Midtrans", "Git"],
     icon: "🛒",
     image: "/images/project-1.jpeg",
-    demo: "#",
-    source: "#",
   },
   {
     title: "Sistem Manajemen Konter Madona Ponsel",
@@ -60,8 +58,6 @@ export const projects = [
     technologies: ["Laravel", "MySQL", "Tailwinds CSS", "Figma", "Git"],
     icon: "📋",
     image: "/images/project-2.jpeg",
-    demo: "#",
-    source: "#",
   },
   {
     title: "Sistem Pemesanan Air Galon Suci",
@@ -69,8 +65,6 @@ export const projects = [
     technologies: ["Laravel", "MySQL", "Tailwinds CSS", "Figma", "Midtrans", "Git"],
     icon: "🌤️",
     image: "/images/project-3.jpeg",
-    demo: "#",
-    source: "#",
   },
 ];
 

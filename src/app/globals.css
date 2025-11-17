@@ -40,6 +40,116 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@keyframes dotRGB {
+  0% {
+    background: radial-gradient(circle, #ff3366 0%, rgba(0, 0, 0, 0) 70%);
+    box-shadow: 0 0 12px rgba(255, 51, 102, 0.9),
+      0 0 24px rgba(255, 51, 102, 0.6);
+  }
+  33% {
+    background: radial-gradient(circle, #18c8ff 0%, rgba(0, 0, 0, 0) 70%);
+    box-shadow: 0 0 12px rgba(24, 200, 255, 0.9),
+      0 0 24px rgba(24, 200, 255, 0.6);
+  }
+  66% {
+    background: radial-gradient(circle, #7cff4d 0%, rgba(0, 0, 0, 0) 70%);
+    box-shadow: 0 0 12px rgba(124, 255, 77, 0.9),
+      0 0 24px rgba(124, 255, 77, 0.6);
+  }
+  100% {
+    background: radial-gradient(circle, #ff3366 0%, rgba(0, 0, 0, 0) 70%);
+    box-shadow: 0 0 12px rgba(255, 51, 102, 0.9),
+      0 0 24px rgba(255, 51, 102, 0.6);
+  }
+}
+
+@keyframes ringRGB {
+  0% {
+    border-color: rgba(255, 51, 102, 0.9);
+    box-shadow: 0 0 30px rgba(255, 51, 102, 0.45);
+  }
+  33% {
+    border-color: rgba(24, 200, 255, 0.95);
+    box-shadow: 0 0 30px rgba(24, 200, 255, 0.45);
+  }
+  66% {
+    border-color: rgba(124, 255, 77, 0.95);
+    box-shadow: 0 0 30px rgba(124, 255, 77, 0.45);
+  }
+  100% {
+    border-color: rgba(255, 51, 102, 0.9);
+    box-shadow: 0 0 30px rgba(255, 51, 102, 0.45);
+  }
+}
+
+@keyframes ringPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  .custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    --cursor-x: 50vw;
+    --cursor-y: 50vh;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 9999;
+    transform: translate3d(var(--cursor-x), var(--cursor-y), 0)
+      translate(-50%, -50%);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+    mix-blend-mode: difference;
+  }
+
+  .custom-cursor.is-visible {
+    opacity: 1;
+  }
+
+  .custom-cursor--dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: dotRGB 2s linear infinite;
+    transition: transform 0.25s ease;
+  }
+
+  .custom-cursor--ring {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(8px);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+    animation: ringRGB 3s linear infinite, ringPulse 2.4s ease-in-out infinite;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease,
+      opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .custom-cursor.is-active.custom-cursor--dot {
+    transform: scale(1.35);
+  }
+
+  .custom-cursor.is-active.custom-cursor--ring {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+}
+
 /* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, var(--primary-light), var(--secondary));

@@ -5,6 +5,16 @@ import Image from "next/image";
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const text1Ref = useRef<HTMLParagraphElement>(null);
+  const text2Ref = useRef<HTMLParagraphElement>(null);
+  const text3Ref = useRef<HTMLParagraphElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const featuresRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -12,6 +22,28 @@ export default function About() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
+            
+            // Staggered animation untuk setiap elemen
+            const elements = [
+              { ref: headerRef, delay: 0 },
+              { ref: titleRef, delay: 100 },
+              { ref: descRef, delay: 200 },
+              { ref: imageRef, delay: 300 },
+              { ref: contentRef, delay: 400 },
+              { ref: text1Ref, delay: 500 },
+              { ref: text2Ref, delay: 600 },
+              { ref: text3Ref, delay: 700 },
+              { ref: statsRef, delay: 800 },
+              { ref: featuresRef, delay: 900 },
+            ];
+
+            elements.forEach(({ ref, delay }) => {
+              if (ref.current) {
+                setTimeout(() => {
+                  ref.current?.classList.add("about-revealed");
+                }, delay);
+              }
+            });
           }
         });
       },
@@ -63,14 +95,19 @@ export default function About() {
       <div className="mx-auto max-w-6xl relative z-10">
         {/* Header Section */}
         <div 
-          className={`text-center mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          ref={headerRef}
+          className="about-header text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+          <h2 
+            ref={titleRef}
+            className="about-title text-4xl md:text-5xl font-bold mb-4 gradient-text"
+          >
             Tentang Saya
           </h2>
-          <p className="text-lg md:text-xl text-muted max-w-3xl mx-auto leading-relaxed">
+          <p 
+            ref={descRef}
+            className="about-subtitle text-lg md:text-xl text-muted max-w-3xl mx-auto leading-relaxed"
+          >
             Seorang Full Stack Developer yang berdedikasi untuk menciptakan solusi digital yang inovatif dan user-friendly
           </p>
         </div>
@@ -79,9 +116,8 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
           {/* Left Column - Visual/Image */}
           <div 
-            className={`transition-all duration-700 delay-200 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-            }`}
+            ref={imageRef}
+            className="about-image"
           >
             <div className="relative">
               {/* Main Image Container */}
@@ -123,25 +159,36 @@ export default function About() {
 
           {/* Right Column - Text Content */}
           <div 
-            className={`transition-all duration-700 delay-300 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
-            }`}
+            ref={contentRef}
+            className="about-content"
           >
             <div className="space-y-6">
               <div className="prose prose-invert max-w-none">
-                <p className="text-lg text-foreground/90 leading-relaxed mb-4">
+                <p 
+                  ref={text1Ref}
+                  className="about-text-1 text-lg text-foreground/90 leading-relaxed mb-4"
+                >
                   Halo! Saya <span className="text-primary font-semibold">Aditya Ahmad Mulyana</span>, seorang Fresh Graduate yang memiliki semangat belajar yang tinggi dan passion yang mendalam terhadap pengembangan web modern dan desain antarmuka pengguna.
                 </p>
-                <p className="text-base text-muted leading-relaxed mb-4">
+                <p 
+                  ref={text2Ref}
+                  className="about-text-2 text-base text-muted leading-relaxed mb-4"
+                >
                 Individu yang berdisiplin tinggi dan betanggung jawab dengan latar belakang di bidang sistem informasi yang memiliki semangat belajar yang tinggi, disiplin serta mampu bekerja dengan tim.
                 </p>
-                <p className="text-base text-muted leading-relaxed">
+                <p 
+                  ref={text3Ref}
+                  className="about-text-3 text-base text-muted leading-relaxed"
+                >
                 Memiliki pengalaman dalam pembuatan website menggunakan framework Laravel. Memiliki keterampilan dalam perancangan website, serta penguasaan dalam penggunaan framework Laravel, Git, dan Github.
                 </p>
               </div>
 
               {/* Stats or Highlights */}
-              <div className="grid grid-cols-2 gap-4 pt-6 border-t border-border/50">
+              <div 
+                ref={statsRef}
+                className="about-stats grid grid-cols-2 gap-4 pt-6 border-t border-border/50"
+              >
                 <div className="text-center p-4 rounded-lg bg-card/50 border border-border/30 hover:border-primary/50 transition-colors">
                   <div className="text-3xl font-bold text-primary mb-1">1+</div>
                   <div className="text-sm text-muted">Tahun Pengalaman</div>
@@ -157,9 +204,8 @@ export default function About() {
 
         {/* Features Grid */}
         <div 
-          className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-700 delay-500 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          ref={featuresRef}
+          className="about-features grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {features.map((feature, index) => (
             <div

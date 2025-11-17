@@ -9,6 +9,13 @@ interface HeroProps {
 export default function Hero({ scrollTo }: HeroProps) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const greetingRef = useRef<HTMLParagraphElement>(null);
+  const nameRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -16,6 +23,25 @@ export default function Hero({ scrollTo }: HeroProps) {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
+            
+            // Staggered animation untuk setiap elemen
+            const elements = [
+              { ref: greetingRef, delay: 0 },
+              { ref: nameRef, delay: 150 },
+              { ref: titleRef, delay: 300 },
+              { ref: descRef, delay: 450 },
+              { ref: buttonsRef, delay: 600 },
+              { ref: imageRef, delay: 200 },
+              { ref: statsRef, delay: 750 },
+            ];
+
+            elements.forEach(({ ref, delay }) => {
+              if (ref.current) {
+                setTimeout(() => {
+                  ref.current?.classList.add("hero-revealed");
+                }, delay);
+              }
+            });
           }
         });
       },
@@ -63,31 +89,42 @@ export default function Hero({ scrollTo }: HeroProps) {
         {/* Main Hero Content - Two Column Layout */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           {/* Left Column - Text Content */}
-          <div 
-            className={`space-y-6 transition-all duration-700 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-            }`}
-          >
+          <div className="space-y-6">
             <div className="space-y-4">
-              <p className="text-lg md:text-xl text-accent font-medium">
+              <p 
+                ref={greetingRef}
+                className="hero-greeting text-lg md:text-xl text-accent font-medium"
+              >
                 Hi, Saya
               </p>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                <span className="gradient-text">Aditya Ahmad</span>
+              <h1 
+                ref={nameRef}
+                className="hero-name text-5xl md:text-6xl lg:text-7xl font-bold leading-tight"
+              >
+                <span className="gradient-text hero-name-gradient">Aditya Ahmad</span>
                 <br />
                 <span className="text-foreground">Mulyana</span>
               </h1>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-muted">
+              <h2 
+                ref={titleRef}
+                className="hero-title text-2xl md:text-3xl lg:text-4xl font-semibold text-muted"
+              >
                 Full Stack Developer & UI/UX Enthusiast
               </h2>
-              <p className="text-base md:text-lg text-muted leading-relaxed max-w-xl">
+              <p 
+                ref={descRef}
+                className="hero-description text-base md:text-lg text-muted leading-relaxed max-w-xl"
+              >
                 Saya menciptakan pengalaman digital yang indah, fungsional, dan berpusat pada pengguna. 
                 Passion terhadap transformasi ide menjadi kenyataan melalui kode yang bersih dan desain yang penuh pertimbangan.
               </p>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div 
+              ref={buttonsRef}
+              className="hero-buttons flex flex-col sm:flex-row gap-4 pt-4"
+            >
               <a
                 href="#contact"
                 onClick={scrollTo("contact")}
@@ -107,9 +144,8 @@ export default function Hero({ scrollTo }: HeroProps) {
 
           {/* Right Column - Image/Visual */}
           <div 
-            className={`relative transition-all duration-700 delay-200 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
-            }`}
+            ref={imageRef}
+            className="hero-image relative"
           >
             <div className="relative w-full max-w-lg mx-auto">
               {/* Decorative circle behind image - Pink/Secondary color like Dora template */}
@@ -147,9 +183,8 @@ export default function Hero({ scrollTo }: HeroProps) {
 
         {/* Stats Cards */}
         <div 
-          className={`grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto transition-all duration-700 delay-300 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          ref={statsRef}
+          className="hero-stats grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto"
         >
           {stats.map((stat, index) => (
             <div

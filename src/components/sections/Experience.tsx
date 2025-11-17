@@ -1,38 +1,57 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { experiences } from "@/lib/data";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 interface ExperienceCardProps {
   experience: typeof experiences[0];
   index: number;
   isLast: boolean;
+  isVisible: boolean;
 }
 
-function ExperienceCard({ experience, index, isLast }: ExperienceCardProps) {
+function ExperienceCard({ experience, index, isLast, isVisible }: ExperienceCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
 
-  // Determine animation direction based on index - alternating pattern
-  const animations = ["fade-right", "fade-left", "fade-up"];
-  const animationDirection = animations[index % 3];
-  const delay = index * 150;
+  useEffect(() => {
+    if (isVisible && cardRef.current) {
+      const delay = index * 200;
+      setTimeout(() => {
+        cardRef.current?.classList.add("experience-card-revealed");
+        // Add direction class based on index
+        if (index % 2 === 0) {
+          cardRef.current?.classList.add("experience-card-left");
+        } else {
+          cardRef.current?.classList.add("experience-card-right");
+        }
+        dotRef.current?.classList.add("experience-dot-revealed");
+        if (lineRef.current) {
+          lineRef.current.classList.add("experience-line-revealed");
+        }
+      }, delay);
+    }
+  }, [isVisible, index]);
 
   return (
     <div
-      className="relative"
-      data-aos={animationDirection}
-      data-aos-duration="700"
-      data-aos-delay={delay}
-      data-aos-easing="ease-out-cubic"
+      ref={cardRef}
+      className="experience-card relative"
     >
       {/* Timeline Line - Only show if not last */}
       {!isLast && (
-        <div className="absolute left-5 md:left-6 top-16 md:top-20 bottom-0 w-0.5 bg-gradient-to-b from-primary/50 via-secondary/30 to-transparent hidden md:block" />
+        <div 
+          ref={lineRef}
+          className="experience-line absolute left-5 md:left-6 top-16 md:top-20 bottom-0 w-0.5 bg-gradient-to-b from-primary/50 via-secondary/30 to-transparent hidden md:block"
+        />
       )}
 
       {/* Timeline Dot */}
-      <div className="absolute left-0 top-6 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-primary via-secondary to-accent border-4 border-background shadow-lg flex items-center justify-center z-10 transform hover:scale-110 transition-transform duration-300">
+      <div 
+        ref={dotRef}
+        className="experience-dot absolute left-0 top-6 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-primary via-secondary to-accent border-4 border-background shadow-lg flex items-center justify-center z-10 transform hover:scale-110 transition-transform duration-300"
+      >
         <span className="text-lg md:text-xl">{experience.icon}</span>
       </div>
 
@@ -140,23 +159,29 @@ function ExperienceCard({ experience, index, isLast }: ExperienceCardProps) {
 export default function Experience() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
-    // Initialize AOS
-    AOS.init({
-      duration: 700,
-      easing: "ease-out-cubic",
-      once: true,
-      offset: 100,
-      disable: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-    });
-
-    // Intersection Observer for header animation
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
+            
+            // Staggered animation untuk header
+            setTimeout(() => {
+              headerRef.current?.classList.add("experience-header-revealed");
+            }, 0);
+            
+            setTimeout(() => {
+              titleRef.current?.classList.add("experience-title-revealed");
+            }, 150);
+            
+            setTimeout(() => {
+              subtitleRef.current?.classList.add("experience-subtitle-revealed");
+            }, 300);
           }
         });
       },
@@ -169,7 +194,6 @@ export default function Experience() {
 
     return () => {
       observer.disconnect();
-      AOS.refresh();
     };
   }, []);
 
@@ -188,18 +212,19 @@ export default function Experience() {
       <div className="mx-auto max-w-6xl relative z-10">
         {/* Header Section */}
         <div
-          className={`text-center mb-16 transition-all duration-700 ${
-            isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          }`}
-          data-aos="fade-up"
-          data-aos-duration="700"
+          ref={headerRef}
+          className="experience-header text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+          <h2 
+            ref={titleRef}
+            className="experience-title text-4xl md:text-5xl font-bold mb-4 gradient-text"
+          >
             Pengalaman Kerja
           </h2>
-          <p className="text-lg md:text-xl text-muted max-w-3xl mx-auto leading-relaxed">
+          <p 
+            ref={subtitleRef}
+            className="experience-subtitle text-lg md:text-xl text-muted max-w-3xl mx-auto leading-relaxed"
+          >
             Perjalanan karir dan pengalaman profesional saya dalam dunia
             pengembangan web
           </p>
@@ -215,6 +240,7 @@ export default function Experience() {
                 experience={experience}
                 index={index}
                 isLast={index === experiences.length - 1}
+                isVisible={isVisible}
               />
             ))}
           </div>

@@ -404,6 +404,30 @@ body {
   animation-delay: 0.45s;
 }
 
+/* Disable animations for static hero image */
+.hero-image.no-animate {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition: none;
+}
+
+.hero-image.no-animate.hero-revealed {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.hero-image.no-animate::after {
+  content: none;
+  animation: none;
+}
+
+.hero-image.no-animate > div,
+.hero-image.no-animate.hero-revealed > div {
+  animation: none !important;
+}
+
 @keyframes stat-card-reveal {
   0% {
     opacity: 0;

@@ -31,6 +31,7 @@ export default function Hero({ scrollTo }: HeroProps) {
               { ref: titleRef, delay: 300 },
               { ref: descRef, delay: 450 },
               { ref: buttonsRef, delay: 600 },
+              { ref: imageRef, delay: 200 },
               { ref: statsRef, delay: 750 },
             ];
 
@@ -144,7 +145,7 @@ export default function Hero({ scrollTo }: HeroProps) {
           {/* Right Column - Image/Visual */}
           <div 
             ref={imageRef}
-            className="hero-image relative"
+            className="hero-image relative no-animate"
           >
             <div className="relative w-full max-w-lg mx-auto">
               {/* Decorative circle behind image - Pink/Secondary color like Dora template */}

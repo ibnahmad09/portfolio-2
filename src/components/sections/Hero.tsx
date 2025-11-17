@@ -32,12 +32,12 @@ export default function Hero({ scrollTo }: HeroProps) {
   const stats = [
     {
       icon: "💼",
-      value: "3+",
+      value: "1+",
       label: "Tahun Pengalaman",
     },
     {
       icon: "🚀",
-      value: "20+",
+      value: "3",
       label: "Proyek Selesai",
     },
     {

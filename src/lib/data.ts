@@ -2,12 +2,12 @@
 export const skills = [
   { 
     name: "HTML/CSS", 
-    icon: "🌐",
+    icon: "🎨",
     category: "frontend"
   },
   { 
     name: "JavaScript", 
-    icon: "⚡",
+    icon: "🟨",
     category: "frontend"
   },
   { 
@@ -17,7 +17,7 @@ export const skills = [
   },
   { 
     name: "Laravel", 
-    icon: "🔺",
+    icon: "🔴",
     category: "backend"
   },
   { 
@@ -27,12 +27,12 @@ export const skills = [
   },
   { 
     name: "TypeScript", 
-    icon: "📘",
+    icon: "🔷",
     category: "frontend"
   },
   { 
     name: "Node.js", 
-    icon: "🟢",
+    icon: "🟩",
     category: "backend"
   },
   { 
@@ -49,31 +49,29 @@ export const projects = [
     title: "Penyewaan Lapangan Futsal",
     description: "Website untuk penyewaan lapangan futsal yang memiliki fitur pencarian lapangan, pemesanan lapangan secara online, serta pembayaran berbasis midtrans.",
     technologies: ["Laravel", "MySQL", "Tailwinds CSS", "Figma", "Midtrans", "Git"],
-    icon: "🛒",
     image: "/images/project-1.jpeg",
   },
   {
     title: "Sistem Manajemen Konter Madona Ponsel",
     description: "Sistem manajemen konter madona ponsel yangemiliki fitur penjualan produk, pembelian produk, fitur royalti, fitur laporan keuangan, serta fitur pembayaran.",
     technologies: ["Laravel", "MySQL", "Tailwinds CSS", "Figma", "Git"],
-    icon: "📋",
     image: "/images/project-2.jpeg",
   },
   {
     title: "Sistem Pemesanan Air Galon Suci",
     description: "Sistem pemesanan air galon suci yang memiliki fitur pemesanan air galon suci secara online, serta fitur tracking, mutasi stok, status pengiriman, serta pencacatan keuangan",
     technologies: ["Laravel", "MySQL", "Tailwinds CSS", "Figma", "Midtrans", "Git"],
-    icon: "🌤️",
     image: "/images/project-3.jpeg",
   },
 ];
 
 
 export const socialLinks = [
-  { name: "GitHub", icon: "📱", url: "#" },
-  { name: "LinkedIn", icon: "💼", url: "#" },
-  { name: "Twitter", icon: "🐦", url: "#" },
-  { name: "Email", icon: "✉️", url: "mailto:john@example.com" },
+  { name: "GitHub", icon: "github", url: "https://github.com/ibnahmad09" },
+  { name: "LinkedIn", icon: "linkedin", url: "#" },
+  { name: "Instagram", icon: "instagram", url: "https://www.instagram.com/ibnahmad09" },
+  { name: "Email", icon: "mail", url: "mailto:adityaahmad927@gmail.com" },
+  { name: "Facebook", icon: "vote", url: "https://www.facebook.com/ibnahmad09" },
 ];
 
 

@@ -1,9 +1,25 @@
 "use client";
 import { useState } from "react";
 import { socialLinks } from "@/lib/data";
+import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+
+  const getIconComponent = (iconName: string) => {
+    switch (iconName) {
+      case "github":
+        return Github;
+      case "linkedin":
+        return Linkedin;
+      case "instagram":
+        return Instagram;
+      case "mail":
+        return Mail;
+      default:
+        return Mail;
+    }
+  };
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,18 +99,21 @@ export default function Contact() {
           </form>
 
           <div className="mt-12 text-center">
-            <p className="text-muted mb-4">Or connect with me on:</p>
-            <div className="flex justify-center gap-6">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  className="text-muted hover:text-primary transition-colors"
-                  aria-label={link.name}
-                >
-                  <span className="text-2xl">{link.icon}</span>
-                </a>
-              ))}
+            <p className="text-muted mb-6">Or connect with me on:</p>
+            <div className="flex justify-center gap-4">
+              {socialLinks.map((link) => {
+                const IconComponent = getIconComponent(link.icon);
+                return (
+                  <a
+                    key={link.name}
+                    href={link.url}
+                    className="group relative p-3 rounded-full bg-card border border-border hover:border-primary hover:bg-primary/10 transition-all duration-300 hover:scale-110"
+                    aria-label={link.name}
+                  >
+                    <IconComponent className="w-5 h-5 text-muted group-hover:text-primary transition-colors" />
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>

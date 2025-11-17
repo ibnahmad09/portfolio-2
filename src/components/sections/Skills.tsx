@@ -68,10 +68,10 @@ const skillDetails: Record<
 
 // Custom easing functions for natural movement
 const easing = {
-  easeOutQuart: [0.25, 0.46, 0.45, 0.94],
-  easeInOutCubic: [0.65, 0.05, 0.36, 1],
-  easeOutBack: [0.34, 1.56, 0.64, 1],
-  easeOutExpo: [0.16, 1, 0.3, 1],
+  easeOutQuart: [0.25, 0.46, 0.45, 0.94] as const,
+  easeInOutCubic: [0.65, 0.05, 0.36, 1] as const,
+  easeOutBack: [0.34, 1.56, 0.64, 1] as const,
+  easeOutExpo: [0.16, 1, 0.3, 1] as const,
 };
 
 // Animation variants for different elements

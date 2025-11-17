@@ -68,10 +68,9 @@ export const projects = [
 
 export const socialLinks = [
   { name: "GitHub", icon: "github", url: "https://github.com/ibnahmad09" },
-  { name: "LinkedIn", icon: "linkedin", url: "#" },
-  { name: "Instagram", icon: "instagram", url: "https://www.instagram.com/ibnahmad09" },
+  { name: "Instagram", icon: "instagram", url: "https://www.instagram.com/adityahmad._" },
   { name: "Email", icon: "mail", url: "mailto:adityaahmad927@gmail.com" },
-  { name: "Facebook", icon: "vote", url: "https://www.facebook.com/ibnahmad09" },
+  { name: "Facebook", icon: "facebook", url: "https://www.facebook.com/aditya.ahmad.14418?locale=id_ID" },
 ];
 
 

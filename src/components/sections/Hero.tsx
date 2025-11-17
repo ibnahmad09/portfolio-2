@@ -31,7 +31,6 @@ export default function Hero({ scrollTo }: HeroProps) {
               { ref: titleRef, delay: 300 },
               { ref: descRef, delay: 450 },
               { ref: buttonsRef, delay: 600 },
-              { ref: imageRef, delay: 200 },
               { ref: statsRef, delay: 750 },
             ];
 
@@ -126,8 +125,8 @@ export default function Hero({ scrollTo }: HeroProps) {
               className="hero-buttons flex flex-col sm:flex-row gap-4 pt-4"
             >
               <a
-                href="#contact"
-                onClick={scrollTo("contact")}
+                href="/cv.pdf"
+                download
                 className="btn-primary px-8 py-4 rounded-lg font-medium text-white focus-ring text-center inline-flex items-center justify-center"
               >
                 Download CV
@@ -158,7 +157,7 @@ export default function Hero({ scrollTo }: HeroProps) {
                 {/* Profile Image */}
                 <div className="relative w-full max-w-md mx-auto">
                   {/* Image container */}
-                  <div className="relative z-10 transform hover:scale-105 transition-transform duration-300">
+                  <div className="relative z-10">
                     <div className="relative w-full max-w-[400px] md:max-w-[500px] mx-auto aspect-[3/4]">
                       <Image
                         src="/images/profile.png"

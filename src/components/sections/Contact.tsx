@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
 import { socialLinks } from "@/lib/data";
-import { Github, Linkedin, Instagram, Mail } from "lucide-react";
+import { Github, Linkedin, Instagram, Mail, Facebook } from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   const getIconComponent = (iconName: string) => {
     switch (iconName) {
@@ -14,6 +16,8 @@ export default function Contact() {
         return Linkedin;
       case "instagram":
         return Instagram;
+      case "facebook":
+        return Facebook;
       case "mail":
         return Mail;
       default:
@@ -21,11 +25,28 @@ export default function Contact() {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    setFormData({ name: "", email: "", message: "" });
-    alert("Message sent! Thank you for reaching out.");
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (res.ok && data?.ok) {
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -92,11 +113,21 @@ export default function Contact() {
             </div>
             <button
               type="submit"
-              className="w-full btn-primary px-8 py-4 rounded-lg font-medium text-white focus-ring"
+              disabled={isSubmitting}
+              className={`w-full btn-primary px-8 py-4 rounded-lg font-medium text-white focus-ring ${isSubmitting ? "opacity-70 cursor-not-allowed" : ""}`}
             >
-              Send Message
+              {isSubmitting ? "Mengirim..." : "Send Message"}
             </button>
           </form>
+
+          <div className="mt-6 text-center">
+            {submitStatus === "success" && (
+              <p className="text-sm text-green-500">Pesan berhasil dikirim.</p>
+            )}
+            {submitStatus === "error" && (
+              <p className="text-sm text-red-500">Gagal mengirim pesan. Coba lagi nanti.</p>
+            )}
+          </div>
 
           <div className="mt-12 text-center">
             <p className="text-muted mb-6">Or connect with me on:</p>
